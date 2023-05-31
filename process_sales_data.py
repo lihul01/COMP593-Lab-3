@@ -89,7 +89,7 @@ def process_sales_data(sales_csv_path, orders_dir_path):
         # Append a "GRAND TOTAL" row
         grand_total = order_df['TOTAL PRICE'].sum()
         grand_total_df = pd.DataFrame({'ITEM PRICE': ['GRAND TOTAL'], 'TOTAL PRICE': [grand_total]})
-        order_df = pd.concat(order_df, grand_total_df)
+        order_df = pd.concat([order_df, grand_total_df])
 
         # Determine the file name and full path of the Excel sheet
         customer_name = order_df['CUSTOMER NAME'].values[0]
@@ -98,7 +98,8 @@ def process_sales_data(sales_csv_path, orders_dir_path):
         order_excel_path = os.path.join(orders_dir_path, order_file)
 
         # Export the data to an Excel sheet
-        
+        worksheet_name = f'Order #{order_id}'
+        # order_df.to_excel(order_excel_path, index = False, sheet_name = worksheet_name)
 
         # TODO: Format the Excel sheet
         # TODO: Define format for the money columns
