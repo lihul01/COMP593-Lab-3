@@ -101,17 +101,17 @@ def process_sales_data(sales_csv_path, orders_dir_path):
         worksheet_name = f'Order #{order_id}'
 
         # Format the Excel sheet
-        
+        writer = pd.ExcelWriter(order_excel_path, engine="xlsxwriter")
 
         # Define format for the money columns
-        writer = pd.ExcelWriter(order_excel_path, engine="xlsxwriter")
         order_df.to_excel(writer, index = False, sheet_name = worksheet_name)
         workbook = writer.book
         worksheet = writer.sheets[worksheet_name]
         format = workbook.add_format({"num_format": "$#,##0.00"})
 
         # Format each colunm
-        worksheet.set_column(1, 1, 18, format)
+        worksheet.set_column(5, 6, 18, format)
+        
 
         # Close the Excelwriter
         writer.close()
