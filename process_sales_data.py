@@ -110,9 +110,13 @@ def process_sales_data(sales_csv_path, orders_dir_path):
         format = workbook.add_format({"num_format": "$#,##0.00"})
 
         # Format each colunm
-        worksheet.set_column(5, 6, 18, format)
+        worksheet.set_column(0, 0, 11)
+        worksheet.set_column(1, 1, 13)
+        worksheet.set_column(2, 4, 15)
+        worksheet.set_column(5, 6, 13, format)
+        worksheet.set_column(7, 7, 10)
+        worksheet.set_column(8, 8, 30)
         
-
         # Close the Excelwriter
         writer.close()
 
