@@ -99,12 +99,23 @@ def process_sales_data(sales_csv_path, orders_dir_path):
 
         # Export the data to an Excel sheet
         worksheet_name = f'Order #{order_id}'
-        # order_df.to_excel(order_excel_path, index = False, sheet_name = worksheet_name)
 
-        # TODO: Format the Excel sheet
-        # TODO: Define format for the money columns
-        # TODO: Format each colunm
-        # TODO: Close the Excelwriter 
+        # Format the Excel sheet
+        
+
+        # Define format for the money columns
+        writer = pd.ExcelWriter(order_excel_path, engine="xlsxwriter")
+        order_df.to_excel(writer, index = False, sheet_name = worksheet_name)
+        workbook = writer.book
+        worksheet = writer.sheets[worksheet_name]
+        format = workbook.add_format({"num_format": "$#,##0.00"})
+
+        # Format each colunm
+        worksheet.set_column(1, 1, 18, format)
+
+        # Close the Excelwriter
+        writer.close()
+
     return
 
 if __name__ == '__main__':
